@@ -1,5 +1,5 @@
 from tkinter import *
-
+import time
 screen = Tk()
 screen.title("Timer")
 screen.geometry("700x600")
@@ -21,17 +21,26 @@ def start():
 def tick():
     if not running:
         return
-    second = secs.get() - 1
-    print(hrs.get(), mins.get(), secs.get())
-    if second == 0:
-        #second = 59
-        secs.set(59)
-        mins.set(mins.get()-1)
-    
-    if mins.get() == 0:
-        mins.set(59)
-        hrs.set(hrs.get()-1)
-    screen.after(1000, tick)
+    second = secs.get()
+    minute = mins.get()
+    hour = hrs.get()
+    totalsecs = (hour * 3600) + (minute * 60) + second
+    print(totalsecs)
+    h,m,s = 0,0,0
+    while totalsecs > 0:
+        print(h,m,s)
+        m,s = divmod(totalsecs, 60)
+        if m > 60:
+            h,m = divmod(m, 60)
+
+        hrs.set(h)
+        secs.set(s)
+        mins.set(m)
+        #screen.after(1000, tick)
+        screen.update()
+        time.sleep(1)
+        totalsecs -= 1
+
 def updatedisplay():
     pass
 def pause():
