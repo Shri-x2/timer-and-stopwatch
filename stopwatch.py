@@ -38,7 +38,7 @@ def tick():
     mins.set(f"{minute:02d}")
     secs.set(f"{second:02d}")
     updatedisplay()
-    id = screen.after(1000, tick())
+    id = screen.after(1000, tick)
 def updatedisplay():
     pass
 def pause():
